@@ -61,41 +61,42 @@ export function FileBrowser({ title, favoritesOnly, deletedOnly }: FileBrowserPr
   const [query, setQuery] = useState("");
   const [type, setType] = useState<FileType>("all");
 
+  
   const orgId: string | undefined = organization.isLoaded && user.isLoaded
-    ? organization.organization?.id ?? user.user?.id
-    : undefined;
+  ? organization.organization?.id ?? user.user?.id
+  : undefined;
 
-  const favorites = useQuery(
-    api.files.getAllFavorites,
-    orgId ? { orgId } : "skip"
-  );
+const favorites = useQuery(
+  api.files.getAllFavorites,
+  orgId ? { orgId } : "skip"
+);
 
-  const files = useQuery(
-    api.files.getFiles,
-    orgId
-      ? {
-          orgId,
-          type: type === "all" ? undefined : type,
-          query,
-          favorites: favoritesOnly,
-          deletedOnly,
-        }
-      : "skip"
-  );
+const files = useQuery(
+  api.files.getFiles,
+  orgId
+    ? {
+        orgId,
+        type: type === "all" ? undefined : type,
+        query,
+        favorites: favoritesOnly,
+        deletedOnly,
+      }
+    : "skip"
+);
 
-  if (!organization.isLoaded || !user.isLoaded) {
-    return <div>Loading...</div>;
-  }
+if (!organization.isLoaded || !user.isLoaded) {
+  return <div>Loading...</div>;
+}
 
-  const isLoading = files === undefined;
+const isLoading = files === undefined;
 
-  const modifiedFiles: FileWithFavorite[] = files?.map((file) => ({
-    ...file,
-    isFavorited: (favorites ?? []).some(
-      (favorite: FavoriteFile) => favorite.fileId === file._id
-    ),
-  })) ?? [];
-
+const modifiedFiles: FileWithFavorite[] = files?.map((file) => ({
+  ...file,
+  isFavorited: (favorites ?? []).some(
+    (favorite: FavoriteFile) => favorite.fileId === file._id
+  ),
+})) ?? [];
+  
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
