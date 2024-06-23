@@ -65,12 +65,12 @@ export function FileBrowser({ title, favoritesOnly, deletedOnly }: FileBrowserPr
     ? organization.organization?.id ?? user.user?.id
     : undefined;
 
-  const { data: favorites, error: favoritesError } = useQuery(
+  const favorites = useQuery(
     api.files.getAllFavorites,
     orgId ? { orgId } : "skip"
   );
 
-  const { data: files, error: filesError } = useQuery(
+  const files = useQuery(
     api.files.getFiles,
     orgId
       ? {
@@ -85,10 +85,6 @@ export function FileBrowser({ title, favoritesOnly, deletedOnly }: FileBrowserPr
 
   if (!organization.isLoaded || !user.isLoaded) {
     return <div>Loading...</div>;
-  }
-
-  if (favoritesError || filesError) {
-    return <div>Error loading data</div>;
   }
 
   const isLoading = files === undefined;
