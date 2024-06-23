@@ -1,7 +1,7 @@
 export default {
   providers: [
     {
-      domain: "https://poetic-salmon-66.clerk.accounts.dev",
+      domain: "https://clerk.workwhales.com",
       applicationID: "convex",
     },
   ],
