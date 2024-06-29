@@ -24,7 +24,7 @@
     "@tanstack/react-table": "^8.12.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "convex": "^1.9.1",
+    "convex": "^1.12.2",
     "date-fns": "^3.3.1",
     "lucide-react": "^0.336.0",
     "next": "14.1.0",
@@ -34,6 +34,7 @@
     "svix": "^1.19.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
+    "vercel": "^34.2.8",
     "zod": "^3.22.4"
   },
   "devDependencies": {
